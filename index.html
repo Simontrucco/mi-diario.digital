@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PULSO | Diario Digital Editorial</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;1,9..144,400&family=Cabinet+Grotesk:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+    <!-- Barra de Noticias en Vivo -->
+    <div class="live-ticker">
+        <span class="ticker-badge">EN VIVO</span>
+        <div class="ticker-text">
+            <p>• Tendencias financieras en el Cono Sur • Innovación espacial en marcha • El clima global registra cambios históricos en las costas de las provincias australes...</p>
+        </div>
+    </div>
+
+    <!-- Encabezado Principal -->
+    <header class="main-header">
+        <div class="header-top">
+            <div class="logo">PULSO</div>
+            <div class="date-container" id="current-date"></div>
+            
+            <div class="search-bar">
+                <input type="text" id="search-input" placeholder="Buscar historias, análisis o autores...">
+                <button id="search-btn">🔍</button>
+            </div>
+        </div>
+        
+        <!-- Categorías "En primera plana" -->
+        <nav class="categories-nav">
+            <button class="cat-btn active" data-category="general">Todas las Crónicas</button>
+            <button class="cat-btn" data-category="technology">Tecnología</button>
+            <button class="cat-btn" data-category="science">Ciencia y Clima</button>
+            <button class="cat-btn" data-category="sports">Deportes</button>
+            <button class="cat-btn" data-category="business">Economía y Mercados</button>
+            <button class="cat-btn" data-id="favorites">★ Colección Guardada</button>
+        </nav>
+    </header>
+
+    <!-- Nueva Maquetación: Gran Portada Centrada + Grilla Inferior -->
+    <main class="news-flow">
+        
+        <!-- 1. Noticia Principal Centrada -->
+        <section class="hero-featured" id="featured-section">
+            <div class="loader">Escribiendo las portadas...</div>
+        </section>
+
+        <!-- 2. Bloque Masivo de Noticias Debajo -->
+        <section class="grid-stories" id="grid-stories-section">
+            <!-- Aquí se cargarán muchas más noticias dinámicamente -->
+        </section>
+    </main>
+
+    <!-- 3. Sección Otras Historias Destacadas (Corregida) -->
+    <section class="carousel-section">
+        <h3 class="section-title">Otras Historias Destacadas</h3>
+        <div class="carousel-grid" id="carousel-track">
+            <!-- Portadas pequeñas con titulares debajo -->
+        </div>
+    </section>
+
+    <script src="js/app.js"></script>
+</body>
+</html>

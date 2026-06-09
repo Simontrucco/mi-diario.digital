@@ -1,0 +1,30 @@
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const params = new URLSearchParams(window.location.search);
+        const id = parseInt(params.get('id'));
+        
+        // Recuperamos el lote de noticias reales guardadas en la sesión
+        const noticiasCache = JSON.parse(sessionStorage.getItem('noticias_en_cache')) || [];
+        const noticia = noticiasCache.find(n => n.id === id);
+        const contenedor = document.getElementById('full-article');
+
+        if(noticia) {
+            document.title = `${noticia.title} | PULSO`;
+            contenedor.innerHTML = `
+                <div class="article-header">
+                    <span style="color: var(--accent); font-weight: 700; text-transform: uppercase; font-size:1.1rem; letter-spacing:1px;">Actualidad de Hoy</span>
+                    <h1>${noticia.title}</h1>
+                    <div class="article-meta">Corresponsalía Real • Publicado: ${noticia.date}</div>
+                </div>
+                <img src="${noticia.img}" class="article-main-img" alt="Imagen de prensa real">
+                <div class="article-body">
+                    ${noticia.body}
+                    <br><br>
+                    <a href="${noticia.urlOriginal}" target="_blank" style="color:var(--accent); font-weight:700;">→ Leer crónica completa en el medio de origen</a>
+                </div>
+            `;
+        } else {
+            contenedor.innerHTML = `<h2>La crónica solicitada caducó o no se encuentra disponible.</h2><a href="index.html">Regresar</a>`;
+        }
+    });
+</script>
