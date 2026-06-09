@@ -1,30 +1,174 @@
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const params = new URLSearchParams(window.location.search);
-        const id = parseInt(params.get('id'));
-        
-        // Recuperamos el lote de noticias reales guardadas en la sesión
-        const noticiasCache = JSON.parse(sessionStorage.getItem('noticias_en_cache')) || [];
-        const noticia = noticiasCache.find(n => n.id === id);
-        const contenedor = document.getElementById('full-article');
+<!DOCTYPE html>
+<html lang="es">
 
-        if(noticia) {
-            document.title = `${noticia.title} | PULSO`;
-            contenedor.innerHTML = `
-                <div class="article-header">
-                    <span style="color: var(--accent); font-weight: 700; text-transform: uppercase; font-size:1.1rem; letter-spacing:1px;">Actualidad de Hoy</span>
-                    <h1>${noticia.title}</h1>
-                    <div class="article-meta">Corresponsalía Real • Publicado: ${noticia.date}</div>
-                </div>
-                <img src="${noticia.img}" class="article-main-img" alt="Imagen de prensa real">
-                <div class="article-body">
-                    ${noticia.body}
-                    <br><br>
-                    <a href="${noticia.urlOriginal}" target="_blank" style="color:var(--accent); font-weight:700;">→ Leer crónica completa en el medio de origen</a>
-                </div>
-            `;
-        } else {
-            contenedor.innerHTML = `<h2>La crónica solicitada caducó o no se encuentra disponible.</h2><a href="index.html">Regresar</a>`;
-        }
-    });
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>PULSO | Artículo</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700&family=Cabinet+Grotesk:wght@400;700;900&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="css/styles.css">
+
+</head>
+
+<body>
+
+<div class="article-container">
+
+    <a href="index.html"
+    class="back-home">
+
+        ← Volver a Portada
+
+    </a>
+
+    <div id="full-article">
+
+        <div class="loader">
+            Cargando artículo...
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+document.addEventListener(
+"DOMContentLoaded",
+()=>{
+
+const params =
+new URLSearchParams(
+window.location.search
+);
+
+const id =
+parseInt(
+params.get("id")
+);
+
+const noticias =
+JSON.parse(
+sessionStorage.getItem(
+"noticias_en_cache"
+)
+) || [];
+
+const noticia =
+noticias.find(
+n => n.id === id
+);
+
+const contenedor =
+document.getElementById(
+"full-article"
+);
+
+if(!noticia){
+
+contenedor.innerHTML = `
+
+<div class="article-header">
+
+<h1>
+Artículo no disponible
+</h1>
+
+</div>
+
+<div class="article-body">
+
+<p>
+La noticia ya no se encuentra en la memoria local del navegador.
+</p>
+
+<p>
+Regresa a la portada y vuelve a abrir la noticia.
+</p>
+
+</div>
+
+`;
+
+return;
+
+}
+
+const contenidoLimpio =
+noticia.body
+.replace(/<img[^>]*>/gi,"")
+.replace(/<a[^>]*>/gi,"")
+.replace(/<\/a>/gi,"");
+
+contenedor.innerHTML = `
+
+<div class="article-header">
+
+    <h1>
+        ${noticia.title}
+    </h1>
+
+    <div class="article-meta">
+
+        ${noticia.date}
+        ·
+        ${noticia.category}
+
+    </div>
+
+</div>
+
+<img
+src="${noticia.img}"
+class="article-main-img"
+alt="${noticia.title}"
+onerror="this.src='https://picsum.photos/1200/800'">
+
+<div class="article-body">
+
+    <p>
+        ${noticia.desc}
+    </p>
+
+    <hr style="margin:40px 0; opacity:.15;">
+
+    ${contenidoLimpio}
+
+    <hr style="margin:40px 0; opacity:.15;">
+
+    <p>
+
+        <strong>
+        Fuente original:
+        </strong>
+
+    </p>
+
+    <p>
+
+        <a
+        href="${noticia.urlOriginal}"
+        target="_blank">
+
+        Abrir noticia completa en el medio original →
+
+        </a>
+
+    </p>
+
+</div>
+
+`;
+
+});
+
 </script>
+
+</body>
+</html>
