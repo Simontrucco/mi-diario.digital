@@ -1,5 +1,5 @@
 :root {
-    --bg-main: #f5f2eb;       /* Fondo pastel general estilo papel nórdico */
+    --bg-main:  #f0ede9;       /* Fondo pastel general estilo papel nórdico */
     --bg-card-1: #e2ebf3;    /* Azul Pastel */
     --bg-card-2: #f7eae6;    /* Coral/Rosa Suave */
     --bg-card-3: #e6f0e9;    /* Verde Menta Pastel */
@@ -10,39 +10,57 @@
     --font-titles: 'Fraunces', serif;
     --font-ui: 'Cabinet Grotesk', sans-serif;
 }
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-
 body {
     background-color: var(--bg-main);
     font-family: var(--font-ui);
     color: var(--text-main);
     line-height: 1.6;
 }
+.live-ticker{
+    background:#0f0f0f;
+    color:#fff;
+    display:flex;
+    align-items:center;
+    gap:20px;
+    padding:12px 20px;
+    overflow:hidden;
+    position:relative;
+}
+.ticker-badge{
+    background:var(--accent);
+    padding:8px 14px;
+    border-radius:4px;
+    font-weight:700;
+    flex-shrink:0;
+    z-index:5;
+    position:relative;
+}
+.ticker-text{
+    flex:1;
+    overflow:hidden;
+    white-space:nowrap;
+}
+#argentina-temperaturas{
+    display:inline-block;
+    padding-left:100%;
+    animation:provincias 45s linear infinite;
+    font-weight:700;
+}
+@keyframes provincias{
 
-.live-ticker {
-    background-color: #0f0f0f;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    padding: 12px 20px;
-    font-size: 0.9rem;
-    overflow: hidden;
-}
-.ticker-badge {
-    background-color: var(--accent);
-    padding: 3px 12px;
-    font-weight: 700;
-    margin-right: 15px;
-    border-radius: 4px;
-}
-.ticker-text {
-    white-space: nowrap;
-    animation: scroll-text 35s linear infinite;
+    from{
+        transform:translateX(0);
+    }
+
+    to{
+        transform:translateX(-100%);
+    }
+
 }
 @keyframes scroll-text {
     0% { transform: translateX(100%); }
@@ -72,7 +90,6 @@ body {
     color: var(--text-muted);
     font-weight: 700;
 }
-
 .search-bar {
     display: flex;
     background: #fff;
@@ -97,31 +114,80 @@ body {
     font-size: 1.2rem;
     cursor: pointer;
 }
-
 /* Categorías */
-.categories-nav {
-    display: flex;
-    gap: 15px;
-    margin-top: 45px;
-    overflow-x: auto;
-    padding-bottom: 12px;
+.categories-nav{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:40px;
+
+    margin-top:40px;
+    padding-bottom:20px;
+
+    border-bottom:1px solid rgba(0,0,0,0.15);
+
+    flex-wrap:wrap;
 }
-.cat-btn {
-    background: #fff;
-    border: 1px solid rgba(0,0,0,0.06);
-    padding: 14px 28px;
-    border-radius: 30px;
-    cursor: pointer;
-    font-size: 1.1rem;
-    font-weight: 700;
-    transition: all 0.25s ease;
-    white-space: nowrap;
+.categories-nav::-webkit-scrollbar{
+    display:none;
 }
-.cat-btn.active, .cat-btn:hover {
+
+.cat-btn{
+
+    background:none;
+    border:none;
+
+    padding:8px 0;
+
+    font-size:1rem;
+    font-weight:500;
+
+    color:var(--text-main);
+
+    cursor:pointer;
+
+    position:relative;
+
+    transition:all .25s ease;
+}
+.cat-btn::after{
+
+    content:"";
+
+    position:absolute;
+
+    bottom:-6px;
+    left:0;
+
+    width:100%;
+    height:2px;
+
+    background:var(--text-main);
+
+    transform:scaleX(0);
+
+    transform-origin:center;
+
+    transition:transform .25s ease;
+}
+.cat-btn:hover::after{
+    transform:scaleX(1);
+}
+.cat-btn:hover,
+.cat-btn.active{
+
+    color:#050505;
+}
+.cat-btn:hover,
+/*.cat-btn.active,
+.cat-btn:hover{
+    background:none;
+    color:var(--text-main);
+}*/
+/*.cat-btn.active, .cat-btn:hover {
     background-color: var(--text-main);
     color: #fff;
-}
-
+}*/
 /* --- Nueva Distribución de Noticias --- */
 .news-flow {
     padding: 40px 5%;
@@ -129,7 +195,6 @@ body {
     flex-direction: column;
     gap: 50px;
 }
-
 /* Noticia Destacada de Portada (Centrada) */
 .hero-featured .story-card {
     background-color: var(--bg-card-1);
@@ -166,7 +231,6 @@ body {
     font-size: 1.3rem;
     color: var(--text-muted);
 }
-
 /* Grilla de Noticias Inferiores (Muchas más noticias) */
 .grid-stories {
     display: grid;
@@ -211,7 +275,6 @@ body {
     color: var(--text-muted);
     margin-bottom: 20px;
 }
-
 .fav-btn {
     background: none;
     border: none;
@@ -219,7 +282,6 @@ body {
     cursor: pointer;
     align-self: flex-start;
 }
-
 /* --- Otras Historias Destacadas --- */
 .carousel-section {
     padding: 60px 5% 100px 5%;
@@ -273,7 +335,7 @@ body {
     line-height: 1.1;
     margin-bottom: 25px;
     letter-spacing: -1px;
-}
+}   
 .article-meta {
     font-size: 1.1rem;
     color: var(--text-muted);
@@ -301,4 +363,251 @@ body {
     text-decoration: none;
     font-weight: 700;
     font-size: 1.1rem;
+}
+
+.weather-strip{
+    background:#ddc8ba;
+    backdrop-filter: blur(8px);
+    padding:14px;
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    flex-wrap:wrap;
+    border-bottom:1px solid rgba(0,0,0,0.05);
+    font-weight:700;
+}
+
+/* ================================= */
+/* PULSO V3 */
+/* ================================= */
+
+.logo-container{
+    display:flex;
+    align-items:center;
+    gap:20px;
+}
+
+#dark-mode-toggle{
+    border:none;
+    background:#ffffff;
+    width:44px;
+    height:44px;
+    border-radius:50%;
+    cursor:pointer;
+    font-size:1.1rem;
+    box-shadow:0 4px 12px rgba(0,0,0,.06);
+}
+
+.breaking-news{
+    background:var(--accent);
+    color:white;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+
+    gap:15px;
+
+    padding:10px 20px;
+
+    font-weight:700;
+
+    text-align:center;
+
+    flex-wrap:wrap;
+}
+.breaking-news span{
+    flex-shrink:0;
+}
+
+#breaking-text{
+    max-width:1200px;
+}
+.breaking-news p{
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+}
+
+.editorial-banner{
+    text-align:center;
+    padding:35px 5%;
+}
+
+.editorial-banner h2{
+    font-family:var(--font-titles);
+    font-size:2rem;
+    margin-bottom:10px;
+}
+
+.editorial-banner p{
+    color:var(--text-muted);
+}
+
+.homepage-layout{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:30px;
+    padding:40px 5%;
+}
+
+.secondary-news{
+    display:flex;
+    flex-direction:column;
+    gap:25px;
+}
+
+.secondary-card{
+    background:#ffffff;
+    border-radius:24px;
+    overflow:hidden;
+    cursor:pointer;
+    transition:.25s;
+    box-shadow:0 5px 18px rgba(0,0,0,.04);
+}
+
+.secondary-card:hover{
+    transform:translateY(-5px);
+}
+
+.secondary-card img{
+    width:100%;
+    height:180px;
+    object-fit:cover;
+}
+
+.secondary-card div{
+    padding:20px;
+}
+
+.secondary-card h3{
+    font-family:var(--font-titles);
+    margin-bottom:10px;
+    line-height:1.2;
+}
+
+.secondary-card p{
+    color:var(--text-muted);
+    font-size:.95rem;
+}
+
+.loader{
+    padding:60px;
+    text-align:center;
+    font-size:1.2rem;
+    font-weight:700;
+}
+
+.weather-strip span{
+    background:rgba(255,255,255,.5);
+    padding:8px 16px;
+    border-radius:50px;
+}
+
+#argentina-temperaturas{
+    font-weight:700;
+    letter-spacing:.2px;
+}
+
+/* ========================= */
+/* MODO OSCURO */
+/* ========================= */
+
+body.dark-mode{
+    background:#171717;
+    color:#f5f5f5;
+}
+
+body.dark-mode .main-header{
+    border-color:rgba(255,255,255,.08);
+}
+
+body.dark-mode .cat-btn{
+    background:#242424;
+    color:#f5f5f5;
+    border-color:#333;
+}
+
+body.dark-mode .cat-btn.active{
+    background:#f5f5f5;
+    color:#171717;
+}
+
+body.dark-mode .news-grid-item,
+body.dark-mode .secondary-card,
+body.dark-mode .carousel-item{
+    background:#242424;
+    color:#f5f5f5;
+}
+
+body.dark-mode .search-bar{
+    background:#242424;
+}
+
+body.dark-mode .search-bar input{
+    color:#fff;
+}
+
+body.dark-mode .editorial-banner p,
+body.dark-mode .article-meta,
+body.dark-mode .news-grid-item p,
+body.dark-mode .secondary-card p{
+    color:#c8c8c8;
+}
+
+body.dark-mode .weather-strip{
+    background:#202020;
+}
+
+body.dark-mode .weather-strip span{
+    background:#2d2d2d;
+}
+
+body.dark-mode #dark-mode-toggle{
+    background:#2a2a2a;
+    color:#fff;
+}
+
+/* ========================= */
+/* RESPONSIVE */
+/* ========================= */
+
+@media(max-width:1000px){
+
+    .homepage-layout{
+        grid-template-columns:1fr;
+    }
+
+    .story-card h2{
+        font-size:2.4rem;
+    }
+
+}
+
+@media(max-width:768px){
+
+    .logo{
+        font-size:3.5rem;
+    }
+
+    .story-card h2{
+        font-size:2rem;
+    }
+
+    .article-header h1{
+        font-size:2.5rem;
+    }
+
+    .grid-stories{
+        grid-template-columns:1fr;
+    }
+
+    .carousel-grid{
+        grid-template-columns:1fr;
+    }
+
+    .search-bar{
+        width:100%;
+    }
+
 }
